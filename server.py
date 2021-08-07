@@ -28,10 +28,14 @@ def home_page():
     if 'gold_choice' not in session:
         session['gold_choice'] = ['(earns 10-20 golds)', '(earns 5-10 golds)', '(earns 2-5 golds)', '(earns/takes 0-50 golds)']
 
+    if 'moves' not in session:
+        session['moves'] = 0
+
     return render_template('index.html')
 
 @app.route('/process', methods = ['post'])
 def process():
+    session['moves'] += 1
     gold_dictionary = {
     'Farm': random.randint(10,20),
     'Cave': random.randint(5,10),
@@ -48,9 +52,22 @@ def process():
     else:
         appendActivities(gold,choice)
 
-    print(request.form['choice'])
+    if session['moves'] == 15:
+        return redirect('/result')
 
     return redirect('/')
+
+@app.route('/result')
+def result():
+    if session['gold'] < 500:
+        result = "Failed"
+    else:
+        result = "Won"
+    return render_template('result.html', result=result)
+
+@app.route('/retry')
+def retry():
+    return redirect('/reset')
 
 @app.route('/reset')
 def reset():

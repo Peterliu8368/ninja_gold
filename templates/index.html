@@ -11,6 +11,7 @@
     <div class="container">
         <div class="row mb-2">
             <h3 class="col-4">Your gold: &nbsp; {{session['gold']}}</h3>
+            <h3>You have made {{session['moves']}} moves, you need to earn 500 gold before or at 15 moves.</h3>
         </div>
         <div class="row g-2 justify-content-between flex-nowrap">
             {% for i in range(4) %}
