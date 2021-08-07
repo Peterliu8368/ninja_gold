@@ -18,7 +18,7 @@
                 <h3>{{session['buildings'][i]}}</h3>
                 <p>{{session['gold_choice'][i]}}</p>
                 <form action="/process" method="POST">
-                    <input type="hidden" name='choice' value="farm">
+                    <input type="hidden" name='choice' value="{{session['buildings'][i]}}">
                     <input type="submit" value="Earn gold!">
                 </form>
             </div>
@@ -27,8 +27,8 @@
         <br>
         <p>Activities</p>
         <div style="height: 200px; border: 3px solid black; overflow: scroll; color: {{session['color']}};">
-            {% for a in session['activities'] %}
-                {{a|safe}}
+            {% for i in range((session['activities']|length) - 1, -1, -1) %}
+                {{session['activities'][i]|safe}}
             {% endfor %}
         </div>
 

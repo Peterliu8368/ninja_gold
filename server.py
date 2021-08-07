@@ -5,15 +5,9 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = 'very secret key'
 
-buildings = ['Farm', 'Cave', 'House', 'Casino']
 gold_choice = ['(earns 10-20 golds)', '(earns 5-10 golds)', '(earns 2-5 golds)', '(earns/takes 0-50 golds)']
 
-gold_dictionary = {
-    'farm': random.randint(10,20),
-    'cave': random.randint(5,10),
-    'house': random.randint(2,5),
-    'casino': random.randint(-50,50),
-}
+
 
 def appendActivities(gold, choice):
     session['gold'] += gold
@@ -38,9 +32,16 @@ def home_page():
 
 @app.route('/process', methods = ['post'])
 def process():
+    gold_dictionary = {
+    'Farm': random.randint(10,20),
+    'Cave': random.randint(5,10),
+    'House': random.randint(2,5),
+    'Casino': random.randint(-50,50),
+    }
     choice = request.form['choice']
     session['color'] = 'green'
     gold = gold_dictionary[choice]
+
     if gold < 0:
         session['gold'] += gold 
         session['activities'].append(f'<p style="color: red">Lost {gold} golds from the {choice}! OOOOPS ({datetime.now()})</p>')
