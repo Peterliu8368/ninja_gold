@@ -36,7 +36,7 @@ def process():
     'Farm': random.randint(10,20),
     'Cave': random.randint(5,10),
     'House': random.randint(2,5),
-    'Casino': random.randint(-50,50),
+    'Casino': random.randint(-50,50)
     }
     choice = request.form['choice']
     session['color'] = 'green'
@@ -52,6 +52,10 @@ def process():
 
     return redirect('/')
 
+@app.route('/reset')
+def reset():
+    session.clear()
+    return redirect('/')
 
 
 if __name__ == '__main__':
