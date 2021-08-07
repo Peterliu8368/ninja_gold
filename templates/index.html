@@ -13,38 +13,16 @@
             <h3 class="col-4">Your gold: &nbsp; {{session['gold']}}</h3>
         </div>
         <div class="row g-2 justify-content-between flex-nowrap">
+            {% for i in range(4) %}
             <div class="col-2 border border-2 border-dark p-4 ">
-                <h3>Farm</h3>
-                <p>(earns 10-20 golds)</p>
+                <h3>{{session['buildings'][i]}}</h3>
+                <p>{{session['gold_choice'][i]}}</p>
                 <form action="/process" method="POST">
                     <input type="hidden" name='choice' value="farm">
                     <input type="submit" value="Earn gold!">
                 </form>
             </div>
-            <div class="col-2 border border-2 border-dark p-4 ">
-                <h3>Cave</h3>
-                <p>(earns 5-10 golds)</p>
-                <form action="/process" method="POST">
-                    <input type="hidden" name='choice' value="cave">
-                    <input type="submit" value="Earn gold!">
-                </form>
-            </div>
-            <div class="col-2 border border-2 border-dark p-4 ">
-                <h3>House</h3>
-                <p>(earns 2-5 golds)</p>
-                <form action="/process" method="POST">
-                    <input type="hidden" name='choice' value="house">
-                    <input type="submit" value="Earn gold!">
-                </form>
-            </div>
-            <div class="col-2 border border-2 border-dark p-4 ">
-                <h3>CASINO</h3>
-                <p>(earns/takes 0-50 golds)</p>
-                <form action="/process" method="POST">
-                    <input type="hidden" name='choice' value="casino">
-                    <input type="submit" value="Earn gold!">
-                </form>
-            </div>
+            {% endfor %}
         </div>
         <br>
         <p>Activities</p>
